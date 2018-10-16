@@ -9,9 +9,13 @@ const Otsikko =  (props) => {
 const Sisalto = (props) => {
     var rows = [];
     for (var i = 0; i<props.osat.length; i++){
-        rows.push(<p>{props.osat[i]} {props.tehtavat[i]}</p>)
+        rows.push(<Osa osa={props.osat[i]} tehtavia={props.tehtavat[i]}/>);
     }
     return fdiv(rows)
+}
+
+const Osa = (props) => {
+    return (<p>{props.osa} {props.tehtavia}</p>)
 }
 
 const Yhteensa = (props) => {
