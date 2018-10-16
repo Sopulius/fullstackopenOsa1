@@ -8,9 +8,9 @@ const Otsikko =  (props) => {
 
 const Sisalto = (props) => {
     var rows = [];
-    for (var i = 0; i<props.osat.length; i++){
-        rows.push(<Osa osa={props.osat[i]} tehtavia={props.tehtavat[i]}/>);
-    }
+    props.osat.forEach((osa) => {
+        rows.push(<Osa osa={osa.nimi} tehtavia={osa.tehtavia}/>);
+    })
     return fdiv(rows)
 }
 
@@ -20,9 +20,9 @@ const Osa = (props) => {
 
 const Yhteensa = (props) => {
     var sum = 0;
-    for (var i = 0; i<props.tehtavat.length; i++){
-        sum+=props.tehtavat[i];
-    }
+    props.osat.forEach((osa) =>{
+        sum+=osa.tehtavia;
+    })
     return fdiv(<p>yhteensä {sum} tehtävää</p>)
 }
 
@@ -33,20 +33,26 @@ const fdiv = (props) =>{
 }
 const App = () => {
   const kurssi = 'Half Stack -sovelluskehitys'
-  const osa1 = 'Reactin perusteet'
-  const tehtavia1 = 10
-  const osa2 = 'Tiedonvälitys propseilla'
-  const tehtavia2 = 7
-  const osa3 = 'Komponenttien tila'
-  const tehtavia3 = 14
+  const osa1 = {
+    nimi: 'Reactin perusteet',
+    tehtavia: 10
+  }
+  const osa2 = {
+    nimi: 'Tiedonvälitys propseilla',
+    tehtavia: 7
+  }
+  const osa3 = {
+    nimi: 'Komponenttien tila',
+    tehtavia: 14
+  }
    
   const osat = [osa1,osa2,osa3];
-  const tehtavat = [tehtavia1,tehtavia2,tehtavia3];
+ 
   return (
     <div>
       <Otsikko kurssi={kurssi}/>
-      <Sisalto osat={osat} tehtavat={tehtavat}/>
-      <Yhteensa tehtavat={tehtavat}/>
+      <Sisalto osat={osat}/>
+      <Yhteensa osat={osat}/>
     </div>
   )
 }
